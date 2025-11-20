@@ -5,11 +5,13 @@ int main () {
     //Declaração das variáveis que armazenarão as informações das cartas
 
     /* Variáveis do mesmo tipo foram declaradas juntas para facilitar a leitura do código, mantive 
-    separada as variáveis tipo array e char porque para mim fez mais sentido porém creio que           possam ser declaradas     na mesma linha também */
+    separada as variáveis tipo array e char porque para mim fez mais sentido porém creio que possam ser       
+    declaradas na mesma linha também (fica ao seu critério)*/
 
     char estado1, estado2;
     char codigo1[4], codigo2[4], cidade1[30], cidade2[30];
-    int populacao1, populacao2, pontos1, pontos2;
+    int pontos1, pontos2;
+    unsigned long int populacao1, populacao2;
     float area1, area2, pib1, pib2, densidade1, densidade2, pibpercapita1, pibpercapita2;
 
     //Impressão das informações do jogo
@@ -31,7 +33,8 @@ int main () {
     scanf("%s", codigo2);
     getchar(); 
     
-    /* (limpeza do buffer do teclado) Meu codigo não estava funcionando corretamente     sem essa      linha, pois dps do último scanf ficou com o \n armazenado em buffer o       getchar limpa esse     buffer para que o fgets possa funcionar normalmente */
+    /* (limpeza do buffer do teclado) Meu codigo não estava funcionando corretamente     sem essa      linha, pois 
+    dps do último scanf ficou com o \n armazenado em buffer o       getchar limpa esse     buffer para que o fgets      possa funcionar normalmente */
 
     printf("\nDigite o nome da cidade da primeira carta: \n");
     fgets(cidade1, 30, stdin); // sem o fgets não conseguiria ler a string com espaço
@@ -42,10 +45,10 @@ int main () {
     cidade2[strcspn(cidade2, "\n")] = 0; // remove o \n do final
 
     printf("\nDigite a população da primeira carta: \n");
-    scanf("%d", &populacao1);
+    scanf("%ld", &populacao1);
 
     printf("\nDigite a população da segunda carta: \n");
-    scanf("%d", &populacao2);
+    scanf("%ld", &populacao2);
 
     printf("\nDigite a área da primeira carta: \n");
     scanf("%f", &area1);
@@ -75,7 +78,7 @@ int main () {
     pibpercapita1 = pib1 / populacao1;
     pibpercapita2 = pib2 / populacao2;
     
-
+    
     //Impressão para o usuário, informando que as cartas foram preenchidas
     printf("\n====================================================================\n");
     printf("|                  Cartas Preenchidas com Sucesso!                  |\n");
@@ -111,7 +114,44 @@ int main () {
     printf("PIB per capita: %.2f \n", pibpercapita2);
     printf("\n\n");
     printf("====================================================================\n");
+    printf("\nMuito bem!\nAgora uma novidade, após essa rodada, suas cartas ganharam um novo atributo que será fundamental na sua batalha!\n");
 
+    //Nova entrada de dados - Nivel Avançado
+    
+    //Entrada de nova váriavel - Super Poder
+    float superPoder1, superPoder2;
+    
+    //Calculo do Super Poder das cartas
+    superPoder1 = (populacao1 + area1 + pib1 + pontos1 + pibpercapita1) - densidade1;
+    superPoder2 = (populacao2 + area2 + pib2 + pontos2 + pibpercapita2) - densidade2;
+
+    //Comparação dos atributos das cartas e impressão do resultado
+    //Váriavel armazena o valor 1 ou 0 dependendo da comparação
+    int comparaPopulacao = (populacao1 > populacao2);
+    int comparaArea = (area1 > area2);
+    int comparaPib = (pib1 > pib2);
+    int comparaPontos = (pontos1 > pontos2);
+    int comparaDensidade = (densidade1 < densidade2);
+    int comparaPibPerCapita = (pibpercapita1 > pibpercapita2);
+    int comparaSuperPoder = (superPoder1 > superPoder2);
+    
+
+    //Impressão da comparação entre os atributos da cartas
+    printf("\n====================================================================\n");
+    printf("*********************** RESULTADO ***********************************\n\n");
+    printf("****           Comparação dos Atributos das Cartas          ****\n\n");
+    printf("População: Carta 0%d é a vencedora (%d)\n", 2 - comparaPopulacao, comparaPopulacao);
+    printf("Área: Carta 0%d é a vencedora (%d)\n", 2 - comparaArea, comparaArea);
+    printf("PIB: Carta 0%d é a vencedora (%d)\n", 2 - comparaPib, comparaPib);
+    printf("Pontos Turísticos: Carta 0%d é a vencedora (%d)\n", 2 - comparaPontos, comparaPontos);
+    printf("Densidade Populacional: Carta 0%d é a vencedora (%d)\n", 2 - comparaDensidade, comparaDensidade);
+    printf("PIB per capita: Carta 0%d é a vencedora (%d)\n", 2 - comparaPibPerCapita, comparaPibPerCapita);
+    printf("Super Poder: Carta 0%d é a vencedora (%d)\n", 2 - comparaSuperPoder, comparaSuperPoder);
+    printf("\n\n");
+    printf("*** Obrigada por ter participado do nosso jogo!\nConvide mais amigos e jogue com eles também!  ***\n");
+    printf("\n===================================================================\n");
+    printf("\n\n");
+    
 
   return 0;
 }
