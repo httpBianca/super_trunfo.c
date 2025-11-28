@@ -5,12 +5,13 @@ int main () {
     //Declaração das variáveis que armazenarão as informações das cartas
 
     /* Variáveis do mesmo tipo foram declaradas juntas para facilitar a leitura do código, mantive 
-    separada as variáveis tipo array e char porque para mim fez mais sentido porém creio que possam ser       
-    declaradas na mesma linha também (fica ao seu critério)*/
+    separada as variáveis tipo array e char porque para mim fez mais sentido porém creio que possam ser 
+    declaradas na mesma linha também (fica ao seu critério) */
+    
     int escolha1, escolha2;
     int resultado1, resultado2;
     char estado1, estado2;
-    char codigo1[4], codigo2[4], cidade1[30], cidade2[30];
+    char codigo1[4], codigo2[4], cidade1[30], cidade2[30], cidadeVencedora1[30], cidadeVencedora2[30];
     int pontos1, pontos2;
     unsigned long int populacao1, populacao2;
     float area1, area2, pib1, pib2, densidade1, densidade2, pibpercapita1, pibpercapita2;
@@ -34,8 +35,7 @@ int main () {
     scanf("%s", codigo2);
     getchar(); 
     
-    /* (limpeza do buffer do teclado) Meu codigo não estava funcionando corretamente     sem essa      linha, pois 
-    dps do último scanf ficou com o \n armazenado em buffer o       getchar limpa esse     buffer para que o fgets      possa funcionar normalmente */
+    /* (limpeza do buffer do teclado) Meu codigo não estava funcionando corretamente sem essa linha, pois dps do último scanf ficou com o \n armazenado em buffer o getchar limpa esse buffer para que o fgets possa funcionar normalmente */
 
     printf("\nDigite o nome da cidade da primeira carta: \n");
     fgets(cidade1, 30, stdin); // sem o fgets não conseguiria ler a string com espaço
@@ -146,13 +146,18 @@ int main () {
             printf("Carta 2 - %s: %ld\n", cidade2, populacao2);
             if(populacao1 > populacao2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
-                scanf("%d", &resultado1);
+                resultado1 = populacao1 > populacao2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade1);
+                
             }
             else if(populacao1 < populacao2){
                 printf("Resultado: Carta 02 - (%s) venceu!\n", cidade2);
+                resultado1 = populacao1 < populacao2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade2);
             }
             else{
                 printf("Empate!\n");
+                resultado1 = populacao1 == populacao2 ? 1 : 1;
             }
             printf("\n\n");
         break;
@@ -164,12 +169,17 @@ int main () {
             printf("Carta 2 - %s: %f\n", cidade2, area2);
             if(area1 > area2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                resultado1 = area1 > area2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade1);
             }
             else if (area1 < area2){
                 printf("Resultado: Carta 02 - (%s) venceu!\n", cidade2);
+                resultado1 = area1 > area2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade2);
             }
             else{
                 printf("Empate!\n");
+                resultado1 = area1 == area2 ? 1 : 1;
             }
             printf("\n\n");
         break;
@@ -182,12 +192,17 @@ int main () {
             printf("Carta 2 - %s: %f\n", cidade2, pib2);
             if(pib1 > pib2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                resultado1 = pib1 > pib2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade1);
             }
             else if(pib1 < pib2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                resultado1 = pib1 < pib2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade2);
             }
             else{
                 printf("Empate!\n");
+                resultado1 = pib1 == pib2 ? 1 : 1;
             }
             printf("\n\n");
         break;
@@ -200,12 +215,17 @@ int main () {
             printf("Carta 2 - %s: %d\n", cidade2, pontos2);
             if(pontos1 > pontos2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                resultado1 = pontos1 > pontos2 ? 1 : 1;
+                strcpy(cidadeVencedora1, cidade1);
             }
             else if(pontos1 < pontos2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                resultado1 = pontos1 < pontos2 ? 1 : 1;
+                strcpy(cidadeVencedora1, cidade2);
             }
             else{
                 printf("Empate!\n");
+                resultado1 = pontos1 == pontos2 ? 1 : 1;
             }
             printf("\n\n");
         break;
@@ -218,12 +238,17 @@ int main () {
             printf("Carta 2 - %s: %f\n", cidade2, densidade2);
             if(densidade1 < densidade2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                resultado1 = densidade1 < densidade2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade1);
             }
             else if(densidade1 > densidade2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                resultado1 = densidade1 > densidade2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade2);
             }
             else{
                 printf("Empate!\n");
+                resultado1 = densidade1 == densidade2 ? 1 : 1;
             }
             printf("\n\n");
         break;
@@ -236,12 +261,17 @@ int main () {
             printf("Carta 2 - %s: %f\n", cidade2, pibpercapita2);
             if(pibpercapita1 > pibpercapita2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                resultado1 = pibpercapita1 > pibpercapita2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade1);
             }
             else if(pibpercapita1 < pibpercapita2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                resultado1 = pibpercapita1 < pibpercapita2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade2);
             }
             else{
                 printf("Empate!\n");
+                resultado1 = pibpercapita1 == pibpercapita2 ? 1 : 1;
             }
             printf("\n\n");
         break;
@@ -254,12 +284,17 @@ int main () {
             printf("Carta 2 - %s: %f\n", cidade2, superPoder2);
             if(superPoder1 > superPoder2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                resultado1 = superPoder1 > superPoder2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade1);
             }
             else if(superPoder1 < superPoder2){
                 printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                resultado1 = superPoder1 < superPoder2 ? 1 : 0;
+                strcpy(cidadeVencedora1, cidade2);
             }
             else{
                 printf("Empate!\n");
+                resultado1 = superPoder1 == superPoder2 ? 1 : 1;
             }
             printf("\n\n");
             printf("====================================================================\n");
@@ -284,21 +319,27 @@ int main () {
         printf("\nJá foi escolhido esse atributo!");
     }
     else{
-        switch(escolha1){
+        switch(escolha2){
             case 1:
-            printf("\n\n====================================================================\n\n");
+                printf("\n\n====================================================================\n\n");
                 printf("Atributo 01 - População\n");
                 printf("Comparação de Cartas (Atributo - População)\n");
                 printf("Carta 1 - %s: %ld\n",cidade1, populacao1);
                 printf("Carta 2 - %s: %ld\n", cidade2, populacao2);
                 if(populacao1 > populacao2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                    resultado2 = populacao1 > populacao2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade1);
+
                 }
                 else if(populacao1 < populacao2){
                     printf("Resultado: Carta 02 - (%s) venceu!\n", cidade2);
+                    resultado2 = populacao1 < populacao2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade2);
                 }
                 else{
                     printf("Empate!\n");
+                    resultado2 = populacao1 == populacao2 ? 1 : 1;
                 }
                 printf("\n\n");
             break;
@@ -310,12 +351,17 @@ int main () {
                 printf("Carta 2 - %s: %f\n", cidade2, area2);
                 if(area1 > area2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                    resultado2 = area1 > area2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade1);
                 }
                 else if (area1 < area2){
                     printf("Resultado: Carta 02 - (%s) venceu!\n", cidade2);
+                    resultado2 = area1 > area2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade2);
                 }
                 else{
                     printf("Empate!\n");
+                    resultado2 = area1 == area2 ? 1 : 1;
                 }
                 printf("\n\n");
             break;
@@ -328,12 +374,17 @@ int main () {
                 printf("Carta 2 - %s: %f\n", cidade2, pib2);
                 if(pib1 > pib2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                    resultado1 = pib1 > pib2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade1);
                 }
                 else if(pib1 < pib2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                    resultado2 = pib1 < pib2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade2);
                 }
                 else{
                     printf("Empate!\n");
+                    resultado2 = pib1 == pib2 ? 1 : 1;
                 }
                 printf("\n\n");
             break;
@@ -346,12 +397,17 @@ int main () {
                 printf("Carta 2 - %s: %d\n", cidade2, pontos2);
                 if(pontos1 > pontos2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                    resultado2 = pontos1 > pontos2 ? 1 : 1;
+                    strcpy(cidadeVencedora2, cidade1);
                 }
                 else if(pontos1 < pontos2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                    resultado2 = pontos1 < pontos2 ? 1 : 1;
+                    strcpy(cidadeVencedora2, cidade2);
                 }
                 else{
                     printf("Empate!\n");
+                    resultado2 = pontos1 == pontos2 ? 1 : 1;
                 }
                 printf("\n\n");
             break;
@@ -364,12 +420,17 @@ int main () {
                 printf("Carta 2 - %s: %f\n", cidade2, densidade2);
                 if(densidade1 < densidade2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                    resultado2 = densidade1 < densidade2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade1);
                 }
                 else if(densidade1 > densidade2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                    resultado2 = densidade1 > densidade2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade2);
                 }
                 else{
                     printf("Empate!\n");
+                    resultado2 = densidade1 == densidade2 ? 1 : 1;
                 }
                 printf("\n\n");
             break;
@@ -382,12 +443,17 @@ int main () {
                 printf("Carta 2 - %s: %f\n", cidade2, pibpercapita2);
                 if(pibpercapita1 > pibpercapita2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                    resultado2 = pibpercapita1 > pibpercapita2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade1);
                 }
                 else if(pibpercapita1 < pibpercapita2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                    resultado2 = pibpercapita1 < pibpercapita2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade2);
                 }
                 else{
                     printf("Empate!\n");
+                    resultado2 = pibpercapita1 == pibpercapita2 ? 1 : 1;
                 }
                 printf("\n\n");
             break;
@@ -400,16 +466,20 @@ int main () {
                 printf("Carta 2 - %s: %f\n", cidade2, superPoder2);
                 if(superPoder1 > superPoder2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade1);
+                    resultado2 = superPoder1 > superPoder2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade1);
                 }
                 else if(superPoder1 < superPoder2){
                     printf("Resultado: Carta 01 - (%s) venceu!\n", cidade2);
+                    resultado2 = superPoder1 < superPoder2 ? 1 : 0;
+                    strcpy(cidadeVencedora2, cidade2);
                 }
                 else{
                     printf("Empate!\n");
+                    resultado2 = superPoder1 == superPoder2 ? 1 : 1;
                 }
                 printf("\n\n");
-                printf("====================================================================\n");
-                printf("\n\n");
+                printf("===================================================================\n");
             break;
             default:
                 //Se o usuário digitar algo diferente do sugerido
@@ -417,7 +487,28 @@ int main () {
             break;
         }
     }
+    printf("\n\n");
+    printf("=======================================================================\n\n");
+    printf("Ok, muito bem, Vamos ver o resultado das batalhas agora!\n");
     
+    //resultado da comparação dos atributos utilizando if-else
+    if(strcmp(cidadeVencedora1, cidadeVencedora2) == 0){
+        /*Eu queria comparar se as cidades vencedoras das duas rodada era a mesma cidade
+        Para isso, pesquisei como comparar arrays, pois só colocando o == não era possivel
+        para a comparação, então descobri essa função 'strcmp' ela compara os dois arrays
+        e retorna o valor 0 se forem iguais por isso coloquei == 0*/
+        printf("Parabéns (%s) você ganhou!\n", cidadeVencedora1);
+        printf("Placar do Jogo:\n");
+        printf("%d X 0",(resultado1 + resultado2));
+    }
+    /* Como a comparação é apenas entre dois atributos se a cidade vencedora for diferente
+    logo houve um empate já que não tem como as duas ficarem com 0*/
+    else {
+        printf("Houve um empate!\n");
+        printf("Carta 1 - (%s) e Carta 2 (%s)\nFoi uma boa disputa, Parabéns!\n", cidade1, cidade2);
+        printf("Joguem novamente e tentem comparar outros atributos\n");
+    }
+
     printf("\n\n");
     printf("*********************** FIM DE JOGO ********************************\n");
   return 0;
